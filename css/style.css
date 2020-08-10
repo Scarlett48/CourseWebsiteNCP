@@ -14,12 +14,12 @@ body, html {
 }
 
 .bgimg-1 {
-  background-image: url("/img/home-background.jpg");
+  background-image: url("../img/home-background.jpg");
   min-height: 500px;
 }
 
 .bgimg-2 {
-  background-image: url("/img/cta2-background.jpg");
+  background-image: url("../img/cta2-background.jpg");
   min-height: 400px;
 }
 
