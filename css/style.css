@@ -5,7 +5,7 @@ body, html {
 
 .bgimg-1, .bgimg-2 {
   position: relative;
-  opacity: 0.65;
+  opacity: 0.8;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,13 +14,45 @@ body, html {
 }
 
 .bgimg-1 {
-  background-image: url("../img/home-background.jpg");
-  min-height: 500px;
+  background-image: url("../img/cta2-background.jpg");
+  min-height: 450px;
 }
 
 .bgimg-2 {
-  background-image: url("../img/cta2-background.jpg");
+  background-image: url("../img/home-background.jpg");
   min-height: 400px;
+}
+
+.caption {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+.abtus{
+  color: #fff;
+  background-color:#292e34;
+  text-align:center;
+  padding:50px 80px;
+  text-align: justify;
+}
+
+h3{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
 }
 
 /* Turn off parallax scrolling for tablets and phones */
@@ -55,7 +87,7 @@ body, html {
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #4caf50;
+  text-decoration: underline dotted white;
   color: white;
 }
 
