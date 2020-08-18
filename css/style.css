@@ -13,6 +13,115 @@ body, html {
 
 }
 
+.signup-content {
+  background: #fff;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  padding: 50px 85px;
+}
+
+.form-title {
+  line-height: 1.66;
+  margin: 0;
+  padding: 0;
+  font-weight: 900;
+  color: #222;
+  font-family: 'Montserrat';
+  font-size: 24px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.signup-form {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #222;
+  font-weight: 400;
+  font-family: 'Montserrat';
+}
+.form-input {
+  outline: none;
+  -webkit-appearance: unset !important;
+  width: 100%;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  padding: 17px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+.form-group {
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.container {
+  width: 500px;
+  position: relative;
+  margin: 0 auto;
+}
+
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards_item {
+  display: flex;
+  padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .cards_item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .cards_item {
+    width: 33.3333%;
+  }
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card_content {
+  padding: 1rem;
+  background: linear-gradient(to bottom left, rgb(219, 172, 119) 40%, #f89e37 100%);
+}
+
+.card_title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  margin: 0px;
+}
+
+.card_text {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;    
+  font-weight: 400;
+}
+
 .bgimg-1 {
   background-image: url("../img/cta2-background.jpg");
   min-height: 450px;
