@@ -13,7 +13,26 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
+	<script language="JavaScript">
+		function signup_validate() {
+			var name = document.getElementById("name").value;
+			let check_name;
+			let check_eq;
+			if (name ===' ')
+			{
+				alert('Name cannot be empty');
+				check_name=false;
+			}
+			else {
+				if(name)
+				check_name = true;
+				else
+				check_name=false;
+			}
+		}
+	</script>
 </head>
+
 <body>
 	<div class="topnav" id="myTopnav">
 		<a class="navbar-brand" href="#" style="float: left">
@@ -30,24 +49,24 @@
         
         <div class="container">
         <div class="signup-content">
-        <form method="POST" id="signup-form" class="signup-form">
+        <form method="POST" id="signup-form" class="signup-form" onsubmit="signup_validate()">
 
 		<h2 class="form-title">Create account</h2>
 		<div class="form-group">
-		<input type="text" class="form-input" name="name" id="name" placeholder="Your Name" />
+		<input type="text" class="form-input" name="name" id="name" placeholder="Your Name" required/>
 		</div>
 		<div class="form-group">
-		<input type="email" class="form-input" name="email" id="email" placeholder="Your Email" />
+		<input type="email" class="form-input" name="email" id="email" placeholder="Your Email" required/>
 		</div>
 		<div class="form-group">
-		<input type="text" class="form-input" name="password" id="password" placeholder="Password" />
+		<input type="text" class="form-input" name="password" id="password" placeholder="Password" required/>
 		<!--<span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>-->
 		</div>
 		<div class="form-group">
-		<input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" />
+		<input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" required/>
 		</div>
         <div class="form-group">
-        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"  />
         </div>
         </form>
         <p>

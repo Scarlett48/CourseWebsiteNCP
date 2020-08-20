@@ -132,6 +132,14 @@ body, html {
   min-height: 400px;
 }
 
+.bgimg-login {
+  font-size: 14px;
+  color: #222;
+  background-image: url("../img/home-background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 115px 0;
+}
 .caption {
   font-family: 'Roboto', sans-serif;
   font-weight: 900;
