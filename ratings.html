@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
-<body style="background-image:url(img/cta2-background.jpg) ; text-align: center;">
+<body >
     <div class="topnav" id="myTopnav">
 		<a class="navbar-brand" href="#" style="float: left">
 			<img src="./img/logo.png" height="28" alt="PROGRESS">
@@ -27,6 +27,10 @@
 		*{
     margin: 0;
     padding: 0;
+}
+body{
+    background-color: #181a1b; 
+    text-align:center;
 }
 .rate {
     float: left;
@@ -50,7 +54,8 @@
     content: '★ ';
 }
 .rate > input:checked ~ label {
-    color: #ffc700;    
+    color: #ffc700;   
+    float: right; 
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
@@ -78,6 +83,7 @@
       <label for="star2" title="text">2 stars</label>
       <input type="radio" id="star1" name="rate" value="1" />
       <label for="star1" title="text">1 star</label>
+      <p1 style="color: #181a1b;">"husdjnlknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</p1>
     </div>
   </body>
 
