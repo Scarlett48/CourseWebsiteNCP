@@ -14,21 +14,87 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 	<script language="JavaScript">
-		function signup_validate() {
-			var name = document.getElementById("name").value;
-			let check_name;
-			let check_eq;
-			if (name ===' ')
+		    function name_check() {
+            var name;
+            name=document.getElementById("name").value;
+            name=name.trim();
+            if(name)
+            {
+                var code, i, len;
+                for (i = 0, len = name.length; i < len; i++) {
+                    code = str.charCodeAt(i);
+                    if (!(code > 64 && code < 91) &&
+                        !(code > 96 && code < 123)) {
+                        alert("Username should have only alphabet");
+                    return false;
+                    }
+                }
+                return true;
+            }
+            else{
+                alert("Name cannot be empty");
+                return false;
+            }
+        }
+
+		function pwd_match_check() {
+			var pwd;
+			var re_pwd;
+			pwd = document.getElementById("password").value;
+			re_pwd = document.getElementById("re_password").value;
+			if (pwd == re_pwd)
+				return true;
+			else
 			{
-				alert('Name cannot be empty');
-				check_name=false;
+				alert("Password didn't match");
+				return false;
 			}
-			else {
-				if(name)
-				check_name = true;
-				else
-				check_name=false;
+		}
+		
+		function ValidateEmail() {
+			var inputText = document.getElementById("email").value;
+			var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+			if(inputText.value.match(mailformat))
+			return true;
+			else
+			{
+			alert("You have entered an invalid email address!"); 
+			return false;
 			}
+		}
+
+		function strength_check() {
+			var pwd_pattern=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+			var pwd;
+			pwd = document.getElementsByName("password").value;
+			if(pwd.match(pwd_pattern)) 
+			{
+			return true;
+			}
+			else
+			{ 
+			alert('Password should be 8-15 characters long with atleast one lower case letter, upper-case letter, number and special characters.')
+			return false;
+			}
+		}
+
+		function form_check() {
+			var passed_check;
+			passed_check=0;
+			if (name_check())
+				passed_check++;
+			if(ValidateEmail)
+				passed_check++;
+			if(strength_check())
+				passedcheck++;
+			if(pwd_match_check())
+				passed_check()++;
+			if(passed_check==4)
+				return true;
+			else
+				return false;
+
+			alert('Done');
 		}
 	</script>
 </head>
@@ -49,7 +115,7 @@
         
         <div class="container">
         <div class="signup-content">
-        <form method="POST" id="signup-form" class="signup-form" onsubmit="signup_validate()">
+        <form method="POST" id="signup-form" class="signup-form" onsubmit="form_check()">
 
 		<h2 class="form-title">Create account</h2>
 		<h6>Register as</h6>
@@ -59,18 +125,18 @@
 		<input type="radio" id="instructor" name="role" value="instructor">
 		<label for="instructor">Instructor</label><br>
 		<div class="form-group">
-		<input type="text" class="form-input" name="name" id="name" placeholder="Your Name" required/>
+		<input type="text" class="form-input" name="name" id="name" placeholder="Your Name" onchange="name_check" required/>
 		</div>
 		<div class="form-group">
 		<input type="email" class="form-input" name="email" id="email" placeholder="Your Email" required/>
 		</div>
 		
 		<div class="form-group">
-		<input type="text" class="form-input" name="password" id="password" placeholder="Password" required/>
+		<input type="text" class="form-input" name="password" id="password" placeholder="Password" onchange="strength_check" required/>
 		<!--<span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>-->
 		</div>
 		<div class="form-group">
-		<input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" required/>
+		<input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" onchange="pwd_match_check" required/>
 		</div>
         <div class="form-group">
         <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"  />
