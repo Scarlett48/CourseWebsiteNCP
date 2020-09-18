@@ -52,12 +52,19 @@
         <form method="POST" id="signup-form" class="signup-form" onsubmit="signup_validate()">
 
 		<h2 class="form-title">Create account</h2>
+		<h6>Register as</h6>
+		<input type="radio" id="student" name="role" value="student">
+		<label for="student">Student</label>
+		<br>
+		<input type="radio" id="instructor" name="role" value="instructor">
+		<label for="instructor">Instructor</label><br>
 		<div class="form-group">
 		<input type="text" class="form-input" name="name" id="name" placeholder="Your Name" required/>
 		</div>
 		<div class="form-group">
 		<input type="email" class="form-input" name="email" id="email" placeholder="Your Email" required/>
 		</div>
+		
 		<div class="form-group">
 		<input type="text" class="form-input" name="password" id="password" placeholder="Password" required/>
 		<!--<span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>-->
