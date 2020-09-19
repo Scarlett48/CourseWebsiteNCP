@@ -24,7 +24,7 @@
                 for (i = 0, len = name.length; i < len; i++) {
                     code = name.charCodeAt(i);
                     if (!(code > 64 && code < 91) &&
-                        !(code > 96 && code < 123) && !(code==' ')) {
+                        !(code > 96 && code < 123) && !(code==32)) {
                         alert("Username should have only alphabet");
                     return false;
                     }
