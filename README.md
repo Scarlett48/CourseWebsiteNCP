@@ -8,6 +8,8 @@ Java Application Server - Tomcat
 
 Java Integrated Development Environment (IDE) - Eclipse
 
+Database - MySQL Workbench
+
 Follow instructions from the docx file below:
 
 https://github.com/Scarlett48/CourseWebsiteNCP/blob/master/Setup%20Development%20Environment.docx
