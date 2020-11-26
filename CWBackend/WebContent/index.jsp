@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +35,7 @@
 		<a href="./login.jsp">Login</a>
 		<a href="./team.jsp">The Team</a>
 		<a href="./courses.jsp">Courses</a>
-  		<a href="./index.html" class="active">About Us</a>
+  		<a href="./index.jsp" class="active">About Us</a>
   		<!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     		<i class="fa fa-bars"></i>
   		</a> -->

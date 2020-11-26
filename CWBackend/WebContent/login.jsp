@@ -24,8 +24,8 @@
 		</a>
 		<a href="./login.jsp"  class="active">Login</a>
 		<a href="./team.jsp">The Team</a>
-		<a href="./courses.jsp">Courses</a>
-  		<a href="./index.html">About Us</a>
+		<a href="CoursesControllerServlet">Courses</a>
+  		<a href="./index.jsp">About Us</a>
 	</div>
 
 	<div class="bgimg-login">
@@ -33,19 +33,24 @@
         
         <div class="container">
         <div class="signup-content">
-        <form method="POST" id="login-form" class="login-form">
+        
+        <form action="StudentControllerServlet" method="GET" id="login-form" class="login-form">
+        
+        <input type="hidden" name="command" id="command" value="CHECK">
+        
 		<h2 class="form-title">Login here</h2>
 		<div class="form-group">
 		<input type="email" class="form-input" name="email" id="email" placeholder="Email ID" />
 		</div>
 		<div class="form-group">
 		<input type="text" class="form-input" name="password" id="password" placeholder="Password" />
-        <!--<span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>-->
+        
         </div>
         <div class="form-group">
         <input type="submit" name="submit" id="submit" class="form-submit" value="Login" />
         </div>
         </form>
+        
         <p>
         New user? <a href="./signup.jsp">Register here</a>
         </p>

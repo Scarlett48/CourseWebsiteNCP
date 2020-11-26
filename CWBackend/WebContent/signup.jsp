@@ -103,8 +103,8 @@
 		</a>
 		<a href="./register.jsp" class="active">Register</a>
 		<a href="./team.jsp">The Team</a>
-		<a href="./courses.jsp">Courses</a>
-  		<a href="./index.html">About Us</a>
+		<a href="CoursesControllerServlet">Courses</a>
+  		<a href="./index.jsp">About Us</a>
 	</div>
 
 	<div class="bgimg-2" min-height=400px>

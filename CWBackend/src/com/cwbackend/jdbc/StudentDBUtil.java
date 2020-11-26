@@ -140,4 +140,24 @@ public class StudentDBUtil {
 			close(myConn, myStmt, myRs);
 		}
 	}
+
+	public void updateStudent(String attr, String val, String email) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		
+		try {
+			// get a connection
+			myConn = dataSource.getConnection();
+			
+			// create SQL statement
+			String sql = "UPDATE students SET "+attr+" = \""+val+"\" WHERE email = \""+email+"\";";
+			myStmt = myConn.createStatement();
+			
+			// execute query
+			myStmt.executeQuery(sql);
+		}
+		finally {
+			close(myConn, myStmt, null);
+		}
+	}
 }
