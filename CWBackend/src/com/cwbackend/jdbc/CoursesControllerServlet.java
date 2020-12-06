@@ -2,6 +2,7 @@ package com.cwbackend.jdbc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -48,10 +49,12 @@ public class CoursesControllerServlet extends HttpServlet {
 				List<String> titles = coursesDBUtil.getCoursesTitle();
 				List<String> links = coursesDBUtil.getCoursesLink();
 				List<String> descriptions = coursesDBUtil.getCoursesDescription();
+				List<Courses> courses = coursesDBUtil.getCourses();
 				
 				request.setAttribute("titles", titles);
 				request.setAttribute("links", links);
 				request.setAttribute("descriptions", descriptions);
+				request.setAttribute("courses", courses);
 				
 				if(session.getAttribute("role")==null) {
 					requestDispatcher = request.getRequestDispatcher("/aboutCourses.jsp");
@@ -81,8 +84,12 @@ public class CoursesControllerServlet extends HttpServlet {
 				addCourse(request,response);
 				break;
 				
-			case "AddQuestion":
-				addQuestion(request, response);
+			case "BeginQuiz":
+				beginQuiz(request, response);
+				break;
+				
+			case "AddNextQuestion":
+				addNextQuestion(request, response);
 				break;
 			}
 		}
@@ -91,8 +98,18 @@ public class CoursesControllerServlet extends HttpServlet {
 		}
 	}
 
-	private void addQuestion(HttpServletRequest request, HttpServletResponse response) {
-		String title = (String) request.getAttribute("ctitle");
+	private void beginQuiz(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		List<Question> questions = coursesDBUtil.getQuestions(request.getParameter("ctitle"));
+		request.setAttribute("questions", questions);
+		
+		requestDispatcher = request.getRequestDispatcher("/quiz.jsp");
+		requestDispatcher.forward(request, response);
+	}
+
+	private void addNextQuestion(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		HttpSession session = request.getSession();
+		
+		String title = (String) session.getAttribute("course_title");
 		String question = request.getParameter("question");
 		String option1 = request.getParameter("option1");
 		String option2 = request.getParameter("option2");
@@ -100,11 +117,17 @@ public class CoursesControllerServlet extends HttpServlet {
 		String option4 = request.getParameter("option4");
 		String correct_option = request.getParameter("correct_option");
 		
+		//Create QUestion object to insert into database
+		Question theQuestion = new Question(title, question, option1+";"+option2+";"+option3+";"+option4, correct_option);
+		coursesDBUtil.insertQuestion(theQuestion);
 		
-		
+		requestDispatcher = request.getRequestDispatcher("./addQuestion.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	private void addCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		
 		String title = request.getParameter("ctitle");
 		String link = request.getParameter("link");
 		String desc = request.getParameter("desc");
@@ -124,7 +147,7 @@ public class CoursesControllerServlet extends HttpServlet {
 		coursesDBUtil.insertCourse(theCourse);
 		
 		if(assignment.equals("yes")) {
-			request.setAttribute("ctitle", title);
+			session.setAttribute("course_title", title);
 			requestDispatcher = request.getRequestDispatcher("/addQuestion.jsp");
 			requestDispatcher.forward(request, response);
 		}

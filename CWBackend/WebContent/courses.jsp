@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.util.*"  %>
+<%@ page import="java.util.*, com.cwbackend.jdbc.Courses"  %>
 
 <!DOCTYPE html>
 <html>
@@ -19,10 +19,11 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
 <script language="JavaScript">
-	function goToCourse(title, link, description){
+	function goToCourse(title, link, description, assign){
 		var url = "./courseContent.jsp?title="+title+"&link="+link+"&desc="+description;
 		localStorage["video_desc"] = description;
 		localStorage["video_title"] = title;
+		localStorage["assignment"] = assign;
 		document.location.href = url;
 	}
 </script>
@@ -48,11 +49,12 @@
         	List<String> titles = (List<String>) request.getAttribute("titles");
         	List<String> descriptions = (List<String>) request.getAttribute("descriptions");
         	List<String> links = (List<String>) request.getAttribute("links");
+        	List<Courses> courses = (List<Courses>) request.getAttribute("courses");
         	
         	for(int i=0; i<descriptions.size(); i++){
            		out.println("<li class=\"cards_item\">");
         		out.println("	<div class=\"card\">");
-        		out.println("		<div onclick=\"goToCourse('"+ titles.get(i) +"','"+ links.get(i) +"','"+ descriptions.get(i)+"')\" class=\"card_content\">");
+        		out.println("		<div onclick=\"goToCourse('"+ titles.get(i) +"','"+ links.get(i) +"','"+ descriptions.get(i)+"','"+courses.get(i).getAssignment()+"')\" class=\"card_content\">");
         		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2><br>");
         		out.println("			<p class=\"card_text\">"+ descriptions.get(i) + "</p>");
         		out.println("			<button class=\"btn card_btn\">Go to Course</button>");

@@ -28,7 +28,11 @@
     	console.log(data.link);
     	document.getElementById('videolink').src = data.link;
     	document.getElementById('videotitle').innerHTML = localStorage["video_title"];
+    	document.getElementById('ctitle').value = localStorage["video_title"];
     	document.getElementById('videodesc').innerHTML = localStorage["video_desc"];
+    	if(localStorage["assignment"] == ("yes")){
+    		document.getElementById('quiz').type="submit";	
+    	}
     	
 }
 </script>
@@ -45,8 +49,9 @@
 	</div>
 	
 	<br><br>
+	<form action="CoursesControllerServlet" method="GET">
 	<div style="color: white">
-            <h3 id="videotitle"></h3>
+            <h3 id="videotitle" name="videotitle" value="video"></h3>
     </div>
     
 	<div class="videoframe">
@@ -59,10 +64,10 @@
 		<p id="videodesc">This course is for beginners. Does not have any prerequisites</p>
 	</div>
 	<br> <br>
-	<h4 style="color: white">You can help us improve the courses by providing ratings for the course!</h4>
-	<a href="./ratings.jsp" >
-		<button type="button" class="btn btn-light">Rate Here!</button>
-	</a>
+		<input type="hidden" id="ctitle" name="ctitle" value="title">
+		<input type="hidden" name="command" value="BeginQuiz">
+		<input type="hidden" id="quiz" value="Begin Quiz" class="btn btn-warning">
+	</form>
 	<br> <br>
 </body>
 </html>

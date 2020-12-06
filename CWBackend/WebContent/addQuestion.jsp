@@ -10,6 +10,24 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
 
+<script type="text/javascript">
+	function validateForm(){
+		if(document.forms["quesForm"]["question"].value=="" ||  document.forms["quesForm"]["option1"].value=="" || document.forms["quesForm"]["option2"].value=="" || document.forms["quesForm"]["option3"].value=="" || document.forms["quesForm"]["option4"].value==""){
+			alert("Fill all the boxes!!");
+			return false;
+		}
+		location = "CoursesControllerServlet";
+	}
+
+	function nextValidateForm(){
+		if(document.forms["quesForm"]["question"].value=="" ||  document.forms["quesForm"]["option1"].value=="" || document.forms["quesForm"]["option2"].value=="" || document.forms["quesForm"]["option3"].value=="" || document.forms["quesForm"]["option4"].value==""){
+			alert("Fill all the boxes!!");
+			return false;
+		}
+		location = "./addQuestion.jsp";
+	}
+</script>
+
 <body style="background-color:#181a1b ; text-align: center; color: white; list-style-position: inside;">
 
 	<div class="topnav" id="myTopnav">
@@ -26,7 +44,7 @@
 	<h2>You can add questions for your course here!</h2>
 	<br>
 	<form name="quesForm" action="CoursesControllerServlet" method="GET">
-		<input type="hidden" name="command" value="AddQuestion">
+		<input type="hidden" name="command" value="AddNextQuestion">
 
 		<label>Enter your question</label><br>
 		<textarea name="question" rows="3" cols="65"></textarea><br><br>
@@ -52,7 +70,7 @@
 		</select>
 		<br><br>
 
-		<input type="submit" value="Add Course" class="btn btn-warning" onclick="validateForm()">
+		<input type="submit" value="Add Next Question" class="btn btn-warning">
 	</form>
 	<br><br>
 </body>
