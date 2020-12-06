@@ -41,7 +41,6 @@
 		</a>
 		<a href="LogoutServlet">Log Out</a>
 		<a href="./profile.jsp">Profile</a>
-		<a href="./team.jsp">The Team</a>
 		<a href="CoursesControllerServlet">Courses</a>
 	</div>
 	

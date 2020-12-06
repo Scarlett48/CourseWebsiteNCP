@@ -37,8 +37,6 @@
     alert("The description of the course must be filled!");
     return false;
   }
-
-  alert("Your course has been added successfully!!!")
 }
 
 </script>

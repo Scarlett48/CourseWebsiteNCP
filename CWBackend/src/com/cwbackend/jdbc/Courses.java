@@ -1,7 +1,6 @@
 package com.cwbackend.jdbc;
 
 public class Courses {
-	private String id;
 	private String title;
 	private String link;
 	private String description;
@@ -15,21 +14,12 @@ public class Courses {
 		this.assignment = assignment;
 	}
 
-	public Courses(String id, String title, String link, String description, double rating, String assignment) { 
-		this.id = id;
+	public Courses(String title, String link, String description, double rating, String assignment) { 
 		this.title = title;
 		this.link = link;
 		this.description = description;
 		this.rating = rating;
 		this.assignment = assignment;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getTitle() {
@@ -74,7 +64,7 @@ public class Courses {
 
 	@Override
 	public String toString() {
-		return "Courses [id=" + id + ", title=" + title + ", link=" + link + ", description=" + description
+		return "Courses [title=" + title + ", link=" + link + ", description=" + description
 				+ ", rating=" + rating + ", assignment=" + assignment + "]";
 	}
 	

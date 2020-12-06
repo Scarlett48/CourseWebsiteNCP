@@ -72,7 +72,7 @@ html {
         <a class="navbar-brand" href="#" style="float: left">
           <img src="./img/logo.png" height="28" alt="PROGRESS">
         </a>
-        <a href="./profile.jsp">Profile</a>
+        <a href="./login.jsp">Login</a>
         <a href="./team.jsp"  class="active">The Team</a>
         <a href="CoursesControllerServlet">Courses</a>
           <a href="./index.jsp">About Us</a>

@@ -68,6 +68,8 @@
 	<form action="updateProfile.jsp">	
 		<input type="submit" value="Update Profile" class="btn btn-warning">
 	</form>
+	
+	<br><br>
   	
 </body>
 </html>

@@ -53,25 +53,36 @@ public class CoursesControllerServlet extends HttpServlet {
 				request.setAttribute("links", links);
 				request.setAttribute("descriptions", descriptions);
 				
+				if(session.getAttribute("role")==null) {
+					requestDispatcher = request.getRequestDispatcher("/aboutCourses.jsp");
+					requestDispatcher.forward(request, response);
+					return;
+				}
 				if(session.getAttribute("role").equals("student")) {
 					requestDispatcher = request.getRequestDispatcher("/courses.jsp");
 					requestDispatcher.forward(request, response);
+					return;
 				}
 				else if(session.getAttribute("role").equals("instructor")) {
 					requestDispatcher = request.getRequestDispatcher("/instructorCourses.jsp");
 					requestDispatcher.forward(request, response);
+					return;
 				}
 				else{
 					requestDispatcher = request.getRequestDispatcher("/aboutCourses.jsp");
 					requestDispatcher.forward(request, response);
+					return;
 				}
-				return;
 			}
 			
 			//route to appropriate method
 			switch(theCommand) {
 			case "AddCourse":
 				addCourse(request,response);
+				break;
+				
+			case "AddQuestion":
+				addQuestion(request, response);
 				break;
 			}
 		}
@@ -80,21 +91,48 @@ public class CoursesControllerServlet extends HttpServlet {
 		}
 	}
 
+	private void addQuestion(HttpServletRequest request, HttpServletResponse response) {
+		String title = (String) request.getAttribute("ctitle");
+		String question = request.getParameter("question");
+		String option1 = request.getParameter("option1");
+		String option2 = request.getParameter("option2");
+		String option3 = request.getParameter("option3");
+		String option4 = request.getParameter("option4");
+		String correct_option = request.getParameter("correct_option");
+		
+		
+		
+	}
+
 	private void addCourse(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String title = request.getParameter("ctitle");
 		String link = request.getParameter("link");
 		String desc = request.getParameter("desc");
 		String assignment = request.getParameter("assignment");
+		PrintWriter out = response.getWriter();
+		
+		//check if the course title is unique
+		if(coursesDBUtil.checkCourse(title)) {
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('The Course Title has to be unique, try again!');");
+			out.println("location='./addCourse.jsp';");
+			out.println("</script>");
+		}
 		
 		//create Courses object to insert into database
 		Courses theCourse = new Courses(title, link, desc, assignment);
 		coursesDBUtil.insertCourse(theCourse);
 		
-		PrintWriter out = response.getWriter();
+		if(assignment.equals("yes")) {
+			request.setAttribute("ctitle", title);
+			requestDispatcher = request.getRequestDispatcher("/addQuestion.jsp");
+			requestDispatcher.forward(request, response);
+		}
+		
 		//route back to courses page
 		out.println("<script type=\"text/javascript\">");
 		out.println("alert('Successfully added the course!');");
-		out.println("location='courses.jsp';");
+		out.println("location='CoursesControllerServlet';");
 		out.println("</script>");
 		
 	}

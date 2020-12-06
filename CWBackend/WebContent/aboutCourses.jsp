@@ -20,10 +20,7 @@
 
 <script language="JavaScript">
 	function goToCourse(title, link, description){
-		var url = "./courseContent.jsp?title="+title+"&link="+link+"&desc="+description;
-		localStorage["video_desc"] = description;
-		localStorage["video_title"] = title;
-		document.location.href = url;
+		alert("Login as a Student to access the courses!!!")
 	}
 </script>
 	
@@ -33,8 +30,10 @@
 		<a class="navbar-brand" href="#" style="float: left">
 			<img src="./img/logo.png" height="28" alt="PROGRESS">
 		</a>
+		<a href="./login.jsp">Login</a>
 		<a href="./team.jsp">The Team</a>
-		<a href="CoursesControllerServlet">Courses</a>
+		<a href="CoursesControllerServlet" class="active">Courses</a>
+  		<a href="./index.jsp" >About Us</a>
     </div>
     <br>
     <div style="color: white">
@@ -51,8 +50,8 @@
         	for(int i=0; i<descriptions.size(); i++){
            		out.println("<li class=\"cards_item\">");
         		out.println("	<div class=\"card\">");
-        		out.println("		<div onclick=\"goToCourse('"+ titles.get(i) +"','"+ links.get(i) +"','"+ descriptions.get(i)+"')\" class=\"card_content\">");
-        		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2>");
+        		out.println("		<div onclick=\"goToCourse()\" class=\"card_content\">");
+        		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2><br>");
         		out.println("			<p class=\"card_text\">"+ descriptions.get(i) + "</p>");
         		out.println("			<button class=\"btn card_btn\">Go to Course</button>");
         		out.println("		</div>");

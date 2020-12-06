@@ -117,7 +117,6 @@ public class StudentControllerServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String role = request.getParameter("role");
-		System.out.println(email+"  "+password+"  "+role);
 		
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
@@ -144,7 +143,7 @@ public class StudentControllerServlet extends HttpServlet {
 		}
 		else if(role.equals("instructor") && instructorDBUtil.checkInstructor(email)) {
 			List<Instructor> ins = instructorDBUtil.getInstructor(email);
-			System.out.println(ins.get(0).getPassword());
+
 			if(ins.get(0).getPassword().equals(password)) {
 				session.setAttribute("role", role);
 				session.setAttribute("email", email);

@@ -127,6 +127,32 @@ public class CoursesDBUtil {
 		return descriptions;
 	}
 	
+	public boolean checkCourse(String title) throws Exception {
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			// get a connection
+			myConn = dataSource.getConnection();
+			
+			// create SQL statement
+			String sql = "SELECT * from courses WHERE course_title = \'" + title + "\'";
+			myStmt = myConn.createStatement();
+			
+			// execute query
+			myRs = myStmt.executeQuery(sql);
+			
+			if (myRs.next())
+				return true;
+			else
+				return false;
+		}
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+	}
+	
 	public void insertCourse(Courses theCourse) throws Exception {
 		
 		Connection myConn = null;
@@ -138,18 +164,17 @@ public class CoursesDBUtil {
 			
 			// create SQL for insert
 			String sql = "INSERT INTO courses "
-					   + "(id, title, link, description, rating, assignment) "
-					   + "VALUES (?, ?, ?, ?, ?, ?)";
+					   + "(course_title, course_link, course_description, course_rating, course_assignment) "
+					   + "VALUES (?, ?, ?, ?, ?)";
 			
 			myStmt = myConn.prepareStatement(sql);
 			
 			// set the param values for the course
-			myStmt.setString(1, theCourse.getId());
-			myStmt.setString(2, theCourse.getTitle());
-			myStmt.setString(3, theCourse.getLink());
-			myStmt.setString(4, theCourse.getDescription());
-			myStmt.setDouble(5, 0.0);
-			myStmt.setString(6, theCourse.getAssignment());
+			myStmt.setString(1, theCourse.getTitle());
+			myStmt.setString(2, theCourse.getLink());
+			myStmt.setString(3, theCourse.getDescription());
+			myStmt.setDouble(4, 0.0);
+			myStmt.setString(5, theCourse.getAssignment());
 			
 			// execute SQL insert
 			myStmt.execute();

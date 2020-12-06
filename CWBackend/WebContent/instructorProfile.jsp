@@ -37,7 +37,7 @@
 		</a>
 		<a href="LogoutServlet">Log Out</a>
 		<a href="./instructorProfile.jsp" class="active">Profile</a>
-		<a href="./addCourse">Add Courses</a>
+		<a href="./addCourse.jsp">Add Courses</a>
 		<a href="CoursesControllerServlet">Courses</a>
 	</div>
 

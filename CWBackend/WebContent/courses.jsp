@@ -53,7 +53,7 @@
            		out.println("<li class=\"cards_item\">");
         		out.println("	<div class=\"card\">");
         		out.println("		<div onclick=\"goToCourse('"+ titles.get(i) +"','"+ links.get(i) +"','"+ descriptions.get(i)+"')\" class=\"card_content\">");
-        		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2>");
+        		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2><br>");
         		out.println("			<p class=\"card_text\">"+ descriptions.get(i) + "</p>");
         		out.println("			<button class=\"btn card_btn\">Go to Course</button>");
         		out.println("		</div>");

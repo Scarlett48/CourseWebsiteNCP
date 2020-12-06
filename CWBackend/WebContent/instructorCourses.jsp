@@ -41,7 +41,9 @@
     <br>
     <div style="color: white">
             <h3>Courses Offered</h3>
+            You need to have a STUDENT account to access the courses
     </div>
+    <br>
     
     <div class="main">    
         <ul class="cards">
@@ -53,10 +55,9 @@
         	for(int i=0; i<descriptions.size(); i++){
            		out.println("<li class=\"cards_item\">");
         		out.println("	<div class=\"card\">");
-        		out.println("		<div onclick=\"goToCourse('"+ titles.get(i) +"','"+ links.get(i) +"','"+ descriptions.get(i)+"')\" class=\"card_content\">");
-        		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2>");
+        		out.println("		<div class=\"card_content\">");
+        		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2><br>");
         		out.println("			<p class=\"card_text\">"+ descriptions.get(i) + "</p>");
-        		out.println("			<button class=\"btn card_btn\">Go to Course</button>");
         		out.println("		</div>");
         		out.println("	</div>");
         		out.println("</li>");
