@@ -18,16 +18,24 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 
+<script language="JavaScript">
+	function goToCourse(title, link, description){
+		var url = "./courseContent.jsp?title="+title+"&link="+link+"&desc="+description;
+		localStorage["video_desc"] = description;
+		localStorage["video_title"] = title;
+		document.location.href = url;
+	}
+</script>
+	
 </head>
 <body style="background-color: #181a1b; text-align: center;">
 	<div class="topnav" id="myTopnav">
 		<a class="navbar-brand" href="#" style="float: left">
 			<img src="./img/logo.png" height="28" alt="PROGRESS">
 		</a>
+		<a>Log Out</a>
 		<a href="./profile.jsp">Profile</a>
-		<a href="./team.jsp">The Team</a>
 		<a href="CoursesControllerServlet">Courses</a>
-  		<a href="./index.jsp">About Us</a>
     </div>
     <br>
     <div style="color: white">
@@ -39,11 +47,12 @@
         	<%
         	List<String> titles = (List<String>) request.getAttribute("titles");
         	List<String> descriptions = (List<String>) request.getAttribute("descriptions");
+        	List<String> links = (List<String>) request.getAttribute("links");
         	
         	for(int i=0; i<descriptions.size(); i++){
            		out.println("<li class=\"cards_item\">");
         		out.println("	<div class=\"card\">");
-        		out.println("		<div onclick=\"window.open('courseContent.jsp','mywindow');\" class=\"card_content\">");
+        		out.println("		<div onclick=\"goToCourse('"+ titles.get(i) +"','"+ links.get(i) +"','"+ descriptions.get(i)+"')\" class=\"card_content\">");
         		out.println("			<h2 class=\"card_title\">"+ titles.get(i) +"</h2>");
         		out.println("			<p class=\"card_text\">"+ descriptions.get(i) + "</p>");
         		out.println("			<button class=\"btn card_btn\">Go to Course</button>");

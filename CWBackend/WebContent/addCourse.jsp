@@ -48,22 +48,30 @@
 		<a class="navbar-brand" href="#" style="float: left">
 			<img src="./img/logo.png" height="28" alt="PROGRESS">
 		</a>
-		<a href="./profile.html">Profile</a>
-		<a href="./team.html">The Team</a>
-		<a href="./courses.html" class="active">Add Courses</a>
-  		<a href="./index.html">About Us</a>
+		<a>Log Out</a>
+		<a href="./profile.jsp">Profile</a>
+		<a href="./team.jsp">The Team</a>
+		<a href="./addCourses.jsp" class="active">Add Courses</a>
+
 	</div>
 	<br>
 	<h2>You can add courses here!</h2>
 	<br>
-	<form name="courseForm">
+	<form name="courseForm" action="CoursesControllerServlet" method="GET">
+		<input type="hidden" name="command" value="AddCourse">
 		<label>Enter your COURSE TITLE</label><br>
 		<input type="text" name="ctitle"><br><br>
 		<label>Upload your course content on YouTube and provide the link here</label><br>
 		<input type="text" name="link"><br><br>
 		<label>Describe your course</label><br>
 		<textarea name="desc" rows="4" cols="40"></textarea><br><br>
-		<input type="submit" name="submit" onclick="validateForm()">
+		<label>Do you like to include multiple choice questions(MCQs) to asses the students?</label><br>
+		<input type="radio" name="assignment" value="yes">
+		<label for="yes">Yes</label><br>
+		<input type="radio" name="assignment" value="no">
+		<label for="no">No</label><br>
+
+		<input type="submit" value="Add Course" class="btn btn-warning" onclick="validateForm()">
 	</form>
 	<br>
 	<h6>Please note that all courses will be published only after moderator's approval</h6>

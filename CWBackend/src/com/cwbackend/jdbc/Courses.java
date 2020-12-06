@@ -9,15 +9,13 @@ public class Courses {
 	private String assignment;
 	
 	public Courses(String title, String link, String description, String assignment) {
-		super();
 		this.title = title;
 		this.link = link;
 		this.description = description;
 		this.assignment = assignment;
 	}
 
-	public Courses(String id, String title, String link, String description, double rating, String assignment) {
-		super();
+	public Courses(String id, String title, String link, String description, double rating, String assignment) { 
 		this.id = id;
 		this.title = title;
 		this.link = link;

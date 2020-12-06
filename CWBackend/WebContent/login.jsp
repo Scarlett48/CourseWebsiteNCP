@@ -24,7 +24,7 @@
 		</a>
 		<a href="./login.jsp"  class="active">Login</a>
 		<a href="./team.jsp">The Team</a>
-		<a href="CoursesControllerServlet">Courses</a>
+		<!-- <a href="CoursesControllerServlet">Courses</a> -->
   		<a href="./index.jsp">About Us</a>
 	</div>
 
@@ -36,7 +36,7 @@
         
         <form action="StudentControllerServlet" method="GET" id="login-form" class="login-form">
         
-        <input type="hidden" name="command" id="command" value="CHECK">
+        <input type="hidden" name="command" id="command" value="CHECK_Login">
         
 		<h2 class="form-title">Login here</h2>
 		<div class="form-group">

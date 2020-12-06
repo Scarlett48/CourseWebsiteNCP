@@ -140,6 +140,51 @@ public class StudentDBUtil {
 			close(myConn, myStmt, myRs);
 		}
 	}
+	
+	public List<Student> getStudent(String email) throws Exception {
+		List<Student> student = new ArrayList<>();
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			// get a connection
+			myConn = dataSource.getConnection();
+			
+			// create SQL statement
+			String sql = "SELECT * from students WHERE email = \""+ email +"\"";
+			myStmt = myConn.createStatement();
+			
+			// execute query
+			myRs = myStmt.executeQuery(sql);
+			
+			// process result set
+			while(myRs.next()) {
+				
+				// retrieve data from result set row
+				String name = myRs.getString("name");
+				String password = myRs.getString("password");
+				String bio = myRs.getString("bio");
+				String area_of_interest = myRs.getString("area_of_interest");
+				int no_courses_taken = myRs.getInt("no_courses_taken");
+				
+				// create new student object
+				Student tempStudent = new Student(email, name, password, bio, area_of_interest, no_courses_taken);
+				
+				// add it to the list of students
+				student.add(tempStudent);
+			}
+		}
+		finally {
+			// close JDBC objects
+			close(myConn, myStmt, myRs);
+		}
+		
+		
+		return student;
+	}
+ 
 
 	public void updateStudent(String attr, String val, String email) throws SQLException {
 		Connection myConn = null;
@@ -151,10 +196,11 @@ public class StudentDBUtil {
 			
 			// create SQL statement
 			String sql = "UPDATE students SET "+attr+" = \""+val+"\" WHERE email = \""+email+"\";";
+			System.out.println(sql);
 			myStmt = myConn.createStatement();
 			
 			// execute query
-			myStmt.executeQuery(sql);
+			myStmt.executeUpdate(sql);
 		}
 		finally {
 			close(myConn, myStmt, null);

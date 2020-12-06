@@ -6,6 +6,8 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  background-color:#181a1b;
+  color:white;
 }
 
 html {
@@ -65,15 +67,15 @@ html {
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
+<body style="background-color:#181a1b;">
     <div class="topnav" id="myTopnav">
         <a class="navbar-brand" href="#" style="float: left">
           <img src="./img/logo.png" height="28" alt="PROGRESS">
         </a>
-        <a href="./profile.html">Profile</a>
-        <a href="./team.html"  class="active">The Team</a>
-        <a href="./courses.html">My Courses</a>
-          <a href="./index.html">About Us</a>
+        <a href="./profile.jsp">Profile</a>
+        <a href="./team.jsp"  class="active">The Team</a>
+        <!-- <a href="CoursesControllerServlet">Courses</a> -->
+          <a href="./index.jsp">About Us</a>
         </div>
 <div class="about-section">
   <h1>Our team</h1>

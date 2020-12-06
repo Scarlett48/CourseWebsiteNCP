@@ -54,6 +54,43 @@ public class CoursesDBUtil {
 		return titles;
 	}
 	
+	public List<String> getCoursesLink() throws Exception {
+		List<String> links = new ArrayList<>();
+		
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+		
+		try {
+			// get a connection
+			myConn = dataSource.getConnection();
+			
+			// create SQL statement
+			String sql = "SELECT * from courses";
+			myStmt = myConn.createStatement();
+			
+			// execute query
+			myRs = myStmt.executeQuery(sql);
+			
+			// process result set
+			while(myRs.next()) {
+				// retrieve data from result set row
+//				System.out.println(myRs.getString(2));
+				String course_link = myRs.getString("course_link");
+				
+				// add it to the list of titles
+				links.add(course_link);
+			}
+		}
+		finally {
+			// close JDBC objects
+			close(myConn, myStmt, myRs);
+		}
+		
+		
+		return links;
+	}
+	
 	public List<String> getCoursesDescription() throws Exception {
 		List<String> descriptions = new ArrayList<>();
 		

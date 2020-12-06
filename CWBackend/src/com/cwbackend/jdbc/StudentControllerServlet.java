@@ -3,6 +3,7 @@ package com.cwbackend.jdbc;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 @WebServlet("/StudentControllerServlet")
@@ -19,6 +21,7 @@ public class StudentControllerServlet extends HttpServlet {
 
 	private StudentDBUtil studentDBUtil;
 	private InstructorDBUtil instructorDBUtil;
+	RequestDispatcher requestDispatcher;
 	
 	@Resource(name="jdbc/cw_backend_db")
 	private DataSource dataSource;
@@ -53,7 +56,7 @@ public class StudentControllerServlet extends HttpServlet {
 			//route to appropriate method
 			switch(theCommand) {
 			
-			case "CHECK":
+			case "CHECK_Login":
 				checkUser(request, response);
 				break;
 			
@@ -68,10 +71,43 @@ public class StudentControllerServlet extends HttpServlet {
 			case "UPDATE_Student":
 				updateStudent(request, response);
 				break;
+				
+			case "ChangePassword":
+				changePassword(request, response);
+				break;
 			}
 		}
 		catch(Exception e) {
 			throw new ServletException(e);
+		}
+		
+	}
+
+	private void changePassword(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// read parameters
+		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
+		
+		String email = (String) session.getAttribute("email");
+		String oldPassword = request.getParameter("oldPass");
+		String newPassword = request.getParameter("newPass");
+		
+		List<Student> stu = studentDBUtil.getStudent(email);
+		if (stu.get(0).getPassword().equals(oldPassword)) {
+			studentDBUtil.updateStudent("password", newPassword, email);
+			
+			updateStudent(request, response);
+			
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Password has been successfully changed!');");
+			out.println("location='profile.jsp';");
+			out.println("</script>");
+		}
+		else {
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Old password does not match!');");
+			out.println("location='updateProfile.jsp';");
+			out.println("</script>");
 		}
 		
 	}
@@ -81,13 +117,46 @@ public class StudentControllerServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		RequestDispatcher requestDispatcher;
 		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 		
 		//check if user exists in database
-		if(studentDBUtil.checkStudent(email) || instructorDBUtil.checkInstructor(email)) { 
-			requestDispatcher = request.getRequestDispatcher("/profile.jsp");
-			requestDispatcher.forward(request, response);
+		if(studentDBUtil.checkStudent(email)){ 
+			List<Student> stu = studentDBUtil.getStudent(email);
+			if (stu.get(0).getPassword().equals(password)) {
+				session.setAttribute("email", email);
+				session.setAttribute("student_name", stu.get(0).getName());
+				session.setAttribute("student_bio", stu.get(0).getBio());
+				session.setAttribute("student_aoi", stu.get(0).getArea_of_interest());
+				
+				requestDispatcher = request.getRequestDispatcher("/profile.jsp");
+				requestDispatcher.forward(request, response);
+			}
+			else {
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Wrong password!');");
+				out.println("location='login.jsp';");
+				out.println("</script>");
+			}
+		}
+		else if(instructorDBUtil.checkInstructor(email)) {
+			List<Instructor> ins = instructorDBUtil.getInstructor(email);
+			if(ins.get(0).getPassword().equals(password)) {
+				session.setAttribute("email", email);
+				session.setAttribute("instructor_name", ins.get(0).getName());
+				session.setAttribute("instructor_about", ins.get(0).getAbout());
+				session.setAttribute("instructor_aoe", ins.get(0).getArea_of_expertise());
+				session.setAttribute("instructor_rating", ins.get(0).getRatings());
+				
+				requestDispatcher = request.getRequestDispatcher("/profile.jsp");
+				requestDispatcher.forward(request, response);
+			}
+			else {
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('Wrong password!');");
+				out.println("location='login.jsp';");
+				out.println("</script>");
+			}
 		}
 		else {
 			out.println("<script type=\"text/javascript\">");
@@ -96,16 +165,40 @@ public class StudentControllerServlet extends HttpServlet {
 			out.println("</script>");
 		}
 		
+		
+		
+		
 	}
 
-	private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		try {
 		// read the parameters required for updation
-		String attr = request.getParameter("attribute");
-		String val = request.getParameter("attribute_value");
-		String email = request.getParameter("email");
+		String attr = request.getParameter("updateAttribute");
+		String val = request.getParameter("updateValue");
+		
+		System.out.println(attr + val);
+		
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("email");
 		
 		studentDBUtil.updateStudent(attr, val, email);
 		
+		if(attr.equals("name")) {
+			session.setAttribute("student_name", val);
+		}
+		else if(attr.equals("bio")) {
+			session.setAttribute("student_bio", val);
+		}
+		else if(attr.equals("aoi")){
+			session.setAttribute("student_aoi", val);
+		}
+		
+		requestDispatcher = request.getRequestDispatcher("/profile.jsp");
+		requestDispatcher.forward(request, response);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void insertInstrcutor(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -115,6 +208,7 @@ public class StudentControllerServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		PrintWriter out = response.getWriter();
+		
 		// check if the given email already exists in database
 		if(instructorDBUtil.checkInstructor(email)) {
 			out.println("<script type=\"text/javascript\">");
