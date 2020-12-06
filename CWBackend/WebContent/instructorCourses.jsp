@@ -34,8 +34,9 @@
 			<img src="./img/logo.png" height="28" alt="PROGRESS">
 		</a>
 		<a href="LogoutServlet">Log Out</a>
-		<a href="./profile.jsp">Profile</a>
-		<a href="CoursesControllerServlet">Courses</a>
+		<a href="./instructorProfile.jsp">Profile</a>
+		<a href="./addCourse.jsp">Add Courses</a>
+		<a href="CoursesControllerServlet" class="active">Courses</a>
     </div>
     <br>
     <div style="color: white">

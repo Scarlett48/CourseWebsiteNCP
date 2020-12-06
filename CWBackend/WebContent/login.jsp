@@ -24,7 +24,7 @@
 		</a>
 		<a href="./login.jsp"  class="active">Login</a>
 		<a href="./team.jsp">The Team</a>
-		<!-- <a href="CoursesControllerServlet">Courses</a> -->
+		<a href="CoursesControllerServlet">Courses</a>
   		<a href="./index.jsp">About Us</a>
 	</div>
 
@@ -39,11 +39,19 @@
         <input type="hidden" name="command" id="command" value="CHECK_Login">
         
 		<h2 class="form-title">Login here</h2>
+		<h6>Sign In as</h6>
+		
+		<input type="radio" id="student" name="role" value="student">
+		<label for="student">Student</label>
+		<br>
+		<input type="radio" id="instructor" name="role" value="instructor">
+		<label for="instructor">Instructor</label><br>
+		
 		<div class="form-group">
 		<input type="email" class="form-input" name="email" id="email" placeholder="Email ID" />
 		</div>
 		<div class="form-group">
-		<input type="text" class="form-input" name="password" id="password" placeholder="Password" />
+		<input type="password" class="form-input" name="password" id="password" placeholder="Password" />
         
         </div>
         <div class="form-group">

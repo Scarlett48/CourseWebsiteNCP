@@ -34,7 +34,7 @@
 		</a>
 		<a href="./login.jsp">Login</a>
 		<a href="./team.jsp">The Team</a>
-		<!-- <a href="CoursesControllerServlet">Courses</a> -->
+		<a href="CoursesControllerServlet">Courses</a>
   		<a href="./index.jsp" class="active">About Us</a>
   		<!-- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     		<i class="fa fa-bars"></i>

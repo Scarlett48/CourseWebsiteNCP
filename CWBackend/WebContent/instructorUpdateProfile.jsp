@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Update Profile</title>
+	<title>Update Profile Instructor</title>
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,15 +43,15 @@
 	<br><br>
 	<h3>What would you like to update?</h3>
 	<br><br>
-	<form action="StudentControllerServlet" method="GET" class="center">
-		<input type="hidden" name="command" value="UPDATE_Student">
+	<form action="InstructorControllerServlet" method="GET" class="center">
+		<input type="hidden" name="command" value="UPDATE_Instructor">
 		<table class="center">
 			<tr>
 				<td>
 					<select name="updateAttribute">
 						<option value="name">Name</option>
-						<option value="bio">Bio</option>
-						<option value="area_of_interest">Area of Interest</option>
+						<option value="about">About</option>
+						<option value="area_of_expertise">Area of Expertise</option>
 					</select>
 				</td>
 				<td>
@@ -64,7 +64,7 @@
 	</form>
 	<br><br>
 
-	<form action="StudentControllerServlet" method="GET" class="center">
+	<form action="InstructorControllerServlet" method="GET" class="center">
 		<input type="hidden" name="command" value="ChangePassword">
 		<h3>Password Change</h3>
 		<table class="center">

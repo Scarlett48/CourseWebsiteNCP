@@ -103,7 +103,7 @@
 		</a>
 		<a href="./register.jsp" class="active">Register</a>
 		<a href="./team.jsp">The Team</a>
-		<!-- <a href="CoursesControllerServlet">Courses</a> -->
+		<a href="CoursesControllerServlet">Courses</a>
   		<a href="./index.jsp">About Us</a>
 	</div>
 

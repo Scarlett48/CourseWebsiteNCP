@@ -116,14 +116,17 @@ public class StudentControllerServlet extends HttpServlet {
 		// read the parameters to know email and password
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String role = request.getParameter("role");
+		System.out.println(email+"  "+password+"  "+role);
 		
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		
 		//check if user exists in database
-		if(studentDBUtil.checkStudent(email)){ 
+		if(role.equals("student") && studentDBUtil.checkStudent(email)){ 
 			List<Student> stu = studentDBUtil.getStudent(email);
 			if (stu.get(0).getPassword().equals(password)) {
+				session.setAttribute("role", role);
 				session.setAttribute("email", email);
 				session.setAttribute("student_name", stu.get(0).getName());
 				session.setAttribute("student_bio", stu.get(0).getBio());
@@ -139,16 +142,18 @@ public class StudentControllerServlet extends HttpServlet {
 				out.println("</script>");
 			}
 		}
-		else if(instructorDBUtil.checkInstructor(email)) {
+		else if(role.equals("instructor") && instructorDBUtil.checkInstructor(email)) {
 			List<Instructor> ins = instructorDBUtil.getInstructor(email);
+			System.out.println(ins.get(0).getPassword());
 			if(ins.get(0).getPassword().equals(password)) {
+				session.setAttribute("role", role);
 				session.setAttribute("email", email);
 				session.setAttribute("instructor_name", ins.get(0).getName());
 				session.setAttribute("instructor_about", ins.get(0).getAbout());
 				session.setAttribute("instructor_aoe", ins.get(0).getArea_of_expertise());
-				session.setAttribute("instructor_rating", ins.get(0).getRatings());
+				session.setAttribute("instructor_ratings", ins.get(0).getRatings());
 				
-				requestDispatcher = request.getRequestDispatcher("/profile.jsp");
+				requestDispatcher = request.getRequestDispatcher("/instructorProfile.jsp");
 				requestDispatcher.forward(request, response);
 			}
 			else {

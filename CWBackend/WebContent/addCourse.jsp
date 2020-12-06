@@ -42,16 +42,16 @@
 }
 
 </script>
-<body style="background-color:#181a1b ; text-align: center; color: white">
+<body style="background-color:#181a1b ; text-align: center; color: white; list-style-position: inside;">
 
 	<div class="topnav" id="myTopnav">
 		<a class="navbar-brand" href="#" style="float: left">
 			<img src="./img/logo.png" height="28" alt="PROGRESS">
 		</a>
-		<a>Log Out</a>
-		<a href="./profile.jsp">Profile</a>
-		<a href="./team.jsp">The Team</a>
-		<a href="./addCourses.jsp" class="active">Add Courses</a>
+		<a href="LogoutServlet">Log Out</a>
+		<a href="./instructorProfile.jsp">Profile</a>
+		<a href="./addCourse.jsp" class="active">Add Courses</a>
+		<a href="CoursesControllerServlet">Courses</a>
 
 	</div>
 	<br>
@@ -61,7 +61,13 @@
 		<input type="hidden" name="command" value="AddCourse">
 		<label>Enter your COURSE TITLE</label><br>
 		<input type="text" name="ctitle"><br><br>
-		<label>Upload your course content on YouTube and provide the link here</label><br>
+		<label>Provide the link to your course here</label><br>
+		<ol>
+			<li>Upload your course video to your YouTube Account
+			<li>Go to the video and click on Share
+			<li>Click on EMBED option
+			<li>Copy the link displayed within 'src' attribute and paste it here
+		</ol>
 		<input type="text" name="link"><br><br>
 		<label>Describe your course</label><br>
 		<textarea name="desc" rows="4" cols="40"></textarea><br><br>
@@ -75,5 +81,6 @@
 	</form>
 	<br>
 	<h6>Please note that all courses will be published only after moderator's approval</h6>
+	<br><br>
 </body>
 </html>

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.sql.DataSource;
 
@@ -29,7 +30,7 @@ public class InstructorDBUtil {
 			
 			// create SQL for insert
 			String sql = "INSERT INTO instructors "
-					   + "(email, name, password, rating) "
+					   + "(email, name, password, ratings) "
 					   + "VALUES (?, ?, ?, ?)";
 			
 			myStmt = myConn.prepareStatement(sql);
@@ -38,7 +39,11 @@ public class InstructorDBUtil {
 			myStmt.setString(1, theInstructor.getEmail());
 			myStmt.setString(2, theInstructor.getName());
 			myStmt.setString(3, theInstructor.getPassword());
-			myStmt.setDouble(4, 4.5);
+			Random rand = new Random(); 
+			double rand_rating = Math.round(rand.nextInt(6));
+			if(rand_rating<1)
+				rand_rating++;
+			myStmt.setDouble(4, rand_rating);
 			
 			// execute SQL insert
 			myStmt.execute();
@@ -137,5 +142,27 @@ public class InstructorDBUtil {
 		
 		
 		return instructor;
+	}
+
+	public void updateInstructor(String attr, String val, String email) throws SQLException {
+		Connection myConn = null;
+		Statement myStmt = null;
+		
+		try {
+			// get a connection
+			myConn = dataSource.getConnection();
+			
+			// create SQL statement
+			String sql = "UPDATE instructors SET "+attr+" = \""+val+"\" WHERE email = \""+email+"\";";
+			System.out.println(sql);
+			myStmt = myConn.createStatement();
+			
+			// execute query
+			myStmt.executeUpdate(sql);
+		}
+		finally {
+			close(myConn, myStmt, null);
+		}
+		
 	}
 }
